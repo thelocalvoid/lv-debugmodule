@@ -181,38 +181,58 @@ end
 
 
 --* ////////////// SERIALIZE FUNCTIONS ///////////////
+
+local numericTypes = {
+    ["INT"] = true,
+    ["NUMBER"] = true
+}
+
 -- NOTE: This is experimental
-Debug.Module.Serialize = function (resourceName, fieldName, fieldType, fieldDefault, fieldMin, fieldMax)
-    -- local args = {...}
-    -- local fieldName = args[1]
-    -- local fieldType = args[2]
-    -- local fieldDefault = args[3]
+Debug.Module.NewEditorVariable = function (resourceName, fieldName, fieldType, fieldDefault, fieldMin, fieldMax)
+    
+    local success = false
 
-    local fieldRange = {min = fieldMin, max = fieldMax}
-    local object = {
-        name = fieldName,
-        type = fieldType,
-        value = fieldDefault,
-        range = fieldRange,
-    }
+    local newField = {}
+    newField.name = fieldName
+    newField.value = fieldDefault
+    newField.type = fieldType
 
-    setmetatable(object, {
-        __call = function (t, ...)
-            return t.value
-        end,
-        __newindex = function (t, k, v)
-            print("table: "..t, "key: "..k, "value: "..v)
-            local errorMsg = "You cannot write to this object"
-            if k != "value" then print(errorMsg, t, k) return end
+    if numericTypes[fieldType] then
+        newField.range = {min = fieldMin, max = fieldMax}
+    end
 
+    -- TODO: Add item to menu
+    -- TODO: [DONE] Create variable edit handler
+    -- TODO: Menu talks to handler in module
+    -- TODO: [DONE] Handler in module sends event to resource
 
+    if Debug.EditorVariables[resourceName] then
+        if Debug.EditorVariables[resourceName][fieldName] then
+
+            -- TODO: INTERGRATE VARIABLES INTO RESOURCE CLEANUP ON STOP/REENSURE
+
+            print(fieldName, "already exists as a variable for", resourceName)
+        else
+            -- Add variable to resource table
+            Debug.EditorVariables[resourceName][fieldName] = newField
+            success = true
         end
-    })
+    else
+        -- Create resource table
+        -- Then Add variable to new resource table
+        Debug.EditorVariables[resourceName] = {}
+        Debug.EditorVariables[resourceName][fieldName] = newField
+        success = true
+    end
 
-    return object
+    if success then
+        TriggerEvent("cdebug-module:CreateEditorVariable->"..resourceName, fieldName, fieldDefault, Debug.VARIABLE_TOKEN)
+    end
+
+
+    print("Field name is a ", type(fieldName))
+    return fieldName, success
 end
-
--- Debug.Module.Serialize("test", "PlayerHeight", "number", 1.6, 1.4, 1.8)
 
 
 
@@ -222,10 +242,13 @@ local IdleFunctions = { -- #### Functions that will run even if module is toggle
     AddText3d   = Debug.Module.Text3d.Add,
     SetText3d   = Debug.Module.Text3d.Set,
     ClearText3d = Debug.Module.Text3d.Clear,
+    
     Print       = Debug.Module.Print,
     Error       = Debug.Module.Error,
     Warn        = Debug.Module.Warn,
-    Success     = Debug.Module.Success
+    Success     = Debug.Module.Success,
+
+    AddEditorVariable = Debug.Module.NewEditorVariable
 }
 
 local ActiveFunctions = { --- #### Functions that will only run if module is toggle on

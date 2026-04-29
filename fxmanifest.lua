@@ -3,6 +3,7 @@ game 'gta5'
 
 
 client_scripts {
+    'enums.lua',
     'module.lua',
     'resourceStop.lua',
     'loop.lua',

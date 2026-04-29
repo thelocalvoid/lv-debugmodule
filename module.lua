@@ -1,6 +1,8 @@
 Debug = {}
 Functions = {}
 Debug.Resources = {}
+Debug.EditorVariables = {}
+Debug.VARIABLE_TOKEN = "DEBUG_VAR:TOKEN"
 
 ---Stores resource pointers.
 ---
@@ -37,64 +39,8 @@ local gPointersIndex = gResourcePointers["ResourceIndex"]
     ---@see Debug.ResourcePointers
 local gPointersName = gResourcePointers["ResourceName"]
 
-Enum = {}
-
-Enum.EntryTypes = {
-    Text3d =    {Name = "Text3d", Bag = "Text3dBag", HandlePrefix = "TEXT3D:"},
-    Text2d =    {Name = "Text2d", Bag = "Text2dBag", HandlePrefix = "TEXT2D:"},
-    Line3d =    {Name = "Line3d", Bag = "Line3dBag", HandlePrefix = "LINE3D:"},
-    Path3d =    {Name = "Path3d", Bag = "Path3dBag", HandlePrefix = "PATH3D:"},
-    Sphere3d =  {Name = "Sphere3d", Bag = "Sphere3dBag", HandlePrefix = "SPHERE3D:"},
-}
 
 
-Enum.ClientCameraStates = {
-    GAMEPLAY = 1,
-    FREECAM = 2,
-    MAP2D = 3,
-    MAP3D = 4,
-    ORBIT = 5,
-}
-
-
-Enum.RenderOrder = {
-    [1] = Enum.EntryTypes.Path3d.Name,
-    [2] = Enum.EntryTypes.Line3d.Name,
-    [3] = Enum.EntryTypes.Sphere3d.Name,
-    [4] = Enum.EntryTypes.Text3d.Name,
-    [5] = Enum.EntryTypes.Text2d.Name,
-}
-
-
-Enum.DynamicFunctions = {
-    ["pos"] = {
-        ["GetEntityCoords"] = GetEntityCoords,
-        ["GetBlipCoords"] = GetBlipCoords,
-    }
-}
-
-
-Enum.CharacterWidths = { -- #### ASCII printable characters (32-126)
-
-}
-
-
-Enum.ColorPresets = {
-     --* default textColor
-    ["white"] =     { r = 255,  g = 255,    b = 255 },
-     --* default lineColor
-    ["black"] =     { r = 0,    g = 0,      b = 0 },
-    ["grey"] =      { r = 127,  g = 127,    b = 127 },
-    ["red"] =       { r = 211,  g = 0,      b = 35 },
-    ["orange"] =    { r = 219,  g = 58,     b = 0 },
-    ["yellow"] =    { r = 229,  g = 153,    b = 0 },
-    ["green"] =     { r = 0,    g = 214,    b = 82 },
-    ["lightblue"] = { r = 0,    g = 149,    b = 229 },
-    ["blue"] =      { r = 0,    g = 37,     b = 226 },
-    ["purple"] =    { r = 82,   g = 0,      b = 224 },
-    ["pink"] =      { r = 181,  g = 0,      b = 221 },
-    --* addd moreeeeeee
-} -- * vector3 didnt work when tested, may be my fault tho
 local colorPresets = Enum.ColorPresets
 local dynamicFunctions = Enum.DynamicFunctions
 local eTypes = Enum.EntryTypes
@@ -103,7 +49,7 @@ local eRenderOrder = Enum.RenderOrder
 ClientCameraState = Enum.ClientCameraStates.GAMEPLAY
 ClientCoords = vector3(0.0,0.0,0.0)
 
-local obsurdPresicionScale = 1.0
+local obsurdPrecisionScale = 1.0
 AveragePadding = 0.0042220190798323 -- AT OBSURD SCALE
 
 
@@ -112,17 +58,17 @@ AveragePadding = 0.0042220190798323 -- AT OBSURD SCALE
 local function CalculateLetterAverage(char)
     print(char..":  ")
     SetTextFont(4)
-    SetTextScale(1.0, obsurdPresicionScale)
+    SetTextScale(1.0, obsurdPrecisionScale)
     BeginTextCommandWidth("STRING")
     AddTextComponentString(char)
     local singleWidth = EndTextCommandGetWidth(false)
     SetTextFont(4)
-    SetTextScale(1.0, obsurdPresicionScale)
+    SetTextScale(1.0, obsurdPrecisionScale)
     BeginTextCommandWidth("STRING")
     AddTextComponentString(char..char)
     local doubleWidth = EndTextCommandGetWidth(false)
     SetTextFont(4)
-    SetTextScale(1.0, obsurdPresicionScale)
+    SetTextScale(1.0, obsurdPrecisionScale)
     BeginTextCommandWidth("STRING")
     AddTextComponentString(char..char..char)
     local tripeWidth = EndTextCommandGetWidth(false)
@@ -134,12 +80,12 @@ end
 
 local function CalculateTrueCharWidth(char, font, scale)
     SetTextFont(font or 4)
-    SetTextScale(1.0, scale or obsurdPresicionScale)
+    SetTextScale(1.0, scale or obsurdPrecisionScale)
     BeginTextCommandWidth("STRING")
     AddTextComponentString(char)
     local singleWidth = EndTextCommandGetWidth(false)
     SetTextFont(font or 4)
-    SetTextScale(1.0, scale or obsurdPresicionScale)
+    SetTextScale(1.0, scale or obsurdPrecisionScale)
     BeginTextCommandWidth("STRING")
     AddTextComponentString(char..char)
     local doubleWidth = EndTextCommandGetWidth(false)
@@ -171,7 +117,7 @@ end
 local function step(string, char)
     string = string..char
     SetTextFont(4)
-    SetTextScale(1.0, obsurdPresicionScale)
+    SetTextScale(1.0, obsurdPrecisionScale)
     BeginTextCommandWidth("STRING")
     AddTextComponentString(string)
     local width = EndTextCommandGetWidth(false)
@@ -188,7 +134,7 @@ local function CalculateDeltas()
         }
 
         SetTextFont(4)
-        SetTextScale(1.0, obsurdPresicionScale)
+        SetTextScale(1.0, obsurdPrecisionScale)
         BeginTextCommandWidth("STRING")
         AddTextComponentString(char)
         local baseWidth = EndTextCommandGetWidth(false)
@@ -236,17 +182,17 @@ local function TestASCIICharacterWidths()
         local char = string.char(i)
         print(char..":  ")
         SetTextFont(4)
-        SetTextScale(1.0, obsurdPresicionScale)
+        SetTextScale(1.0, obsurdPrecisionScale)
         BeginTextCommandWidth("STRING")
         AddTextComponentString(char)
         local singleWidth = EndTextCommandGetWidth(true)
         SetTextFont(4)
-        SetTextScale(1.0, obsurdPresicionScale)
+        SetTextScale(1.0, obsurdPrecisionScale)
         BeginTextCommandWidth("STRING")
         AddTextComponentString(char..char)
         local doubleWidth = EndTextCommandGetWidth(true)
         SetTextFont(4)
-        SetTextScale(1.0, obsurdPresicionScale)
+        SetTextScale(1.0, obsurdPrecisionScale)
         BeginTextCommandWidth("STRING")
         AddTextComponentString(char..char..char)
         local tripeWidth = EndTextCommandGetWidth(true)
@@ -570,8 +516,8 @@ Debug.RemoveResource = function (resourceName)
         return
     end
 
-    local pIndex = Debug.GetResourceIndexFromName(resourceName)
-    local pIndexEnabled = Debug.GetResourceEnabledIndexFromIndex(pIndex)
+    local pIndex = GetResourceIndexFromName(resourceName)
+    local pIndexEnabled = GetResourceEnabledIndexFromIndex(pIndex)
     
     local t = gResources
     local isLast = (pIndex == #t)
@@ -611,6 +557,8 @@ Debug.LoadModule = function (resourceName, authKey, enabled)
     print("'Module' request from: "..resourceName)
 
     local newTbl = {}
+    newTbl["VARIABLE_TOKEN"] = Debug.VARIABLE_TOKEN
+
     local list = ""
 
     if enabled then
@@ -677,8 +625,8 @@ end
 
 -- Debug.ProtectNils = function () -- * Unused
 --     print('protected')
---     local tabl = {}
---     setmetatable(tabl, {
+--     local table = {}
+--     setmetatable(table, {
 --         __index = function(t, k)
 --             -- create a subtable for "Module.Table"
 --             local sub = setmetatable({}, {
@@ -693,7 +641,7 @@ end
 --             return sub
 --         end
 --     })
---     return tabl
+--     return table
 -- end
 
 -- function SafeTable() -- * Unused
@@ -897,7 +845,7 @@ local ProcessString = function (string)
         local byte = char:byte()
 
         --* Add Character width to total width
-        totalWidth = totalWidth + (eCharacterWidths[byte] / obsurdPresicionScale)
+        totalWidth = totalWidth + (eCharacterWidths[byte] / obsurdPrecisionScale)
 
         --* Replace character with html element if special character
         if byteToHtml[byte] then
@@ -978,6 +926,40 @@ rasterizeFunctionList = {
     }
     
 }
+
+local doesValueMatchVariablesType = function (resourceName, varName, value)
+    local typeRequired = Debug.EditorVariables[resourceName][varName].type
+
+    if type(value) == typeRequired then
+        return true
+    else
+        return false
+    end
+end
+
+local sendVariableUpdateToResource = function (resourceName, varName, value)
+    TriggerEvent("cdebug-module:SetEditorVariable->"..resourceName, varName, value, Debug.VARIABLE_TOKEN)
+end
+
+local setEditorVariable = function (resourceName, varName, value)
+    Debug.EditorVariables[resourceName][varName].value = value
+end
+
+
+RegisterCommand("SetEditorVariable", function (source, args)
+    local resourceName = args[1]
+    local varName = args[2]
+    local value = args[3]
+
+    if doesValueMatchVariablesType(resourceName, varName, value) then
+        setEditorVariable(resourceName, varName, value)
+        sendVariableUpdateToResource(resourceName, varName, value)
+    else
+        print("TYPE MISMATCH")
+    end
+
+end, false)
+
 
 
 -----------------------------------------------------------------------
