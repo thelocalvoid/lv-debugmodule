@@ -40,3 +40,11 @@ The footage, *if not such low bitrate* would show you the information about each
 
 https://github.com/user-attachments/assets/03beb74c-e0df-4b06-bb16-31f6f24c95aa
 
+Additionally, I have been working on a live variable editor. Of which to my knowledge, has never been done in fivem before.
+
+I have proven it is possible with prototypes, but it isn't refined enough to add here.
+
+It allows you to change variables in real time, via a chat commmand or a inspector menu (incomplete). 
+This is similar to how you can expose variables to the inspector of game engines like unity.
+
+This saves you from having to tab between applications to edit, re-ensure your resource or even restart your server - every time you *just* want to tweak a variable.
