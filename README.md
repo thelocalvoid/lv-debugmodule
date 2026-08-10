@@ -33,3 +33,10 @@ Visualising the system changing its state, as the condition of the vehicle chang
 ##### * volume warning *
 
 https://github.com/user-attachments/assets/23a2e31b-5b6f-46da-91a8-f1ba132118ba
+
+Here is the module, after quite alot of work.
+
+The footage, *if not such low bitrate* would show you the information about each vehicle in proximity, changing in real time. I also added conditional values to allow for colourisation.
+
+https://github.com/user-attachments/assets/03beb74c-e0df-4b06-bb16-31f6f24c95aa
+
