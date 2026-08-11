@@ -4,9 +4,9 @@ The tool allowed me to record footage, and watch back frame-by-frame to see what
 Here are some videos from development, showing it's practical use - in comparison to reading the console output. 
 
 Necessary context:
-  - **Blue:**  registered ped
-  - **Green:** visualisation of raycasts - checking LOS to ped bones
-  - **Red:**  ped in memory, but ignored for optimisation
+  - 🔵**Blue:**  registered ped
+  - 🟢**Green:** visualisation of raycasts - checking LOS to ped bones
+  - 🔴**Red:**  ped in memory, but ignored for optimisation
 
 *Also, the RGB graph has nothing to do with the module, its just a netgraph I had open.*
     
@@ -21,8 +21,8 @@ Here it shows each ped's ID, along with their dot product from the forward vecto
 This was helpful in debugging an issue i had with faulty dot product results - the angles returned weren't accurate to the position of the ped. And I was able to see that, in 3d space. 
 
 Context:
-  - **Yellow:**  ped is in vision cone of sensor.
-  - **Orange:**  ped is outside vision cone of sensor.
+  - 🟡**Yellow:**  ped is in vision cone of sensor.
+  - 🟠**Orange:**  ped is outside vision cone of sensor.
 
 https://github.com/user-attachments/assets/95d85217-0f7b-4d5e-b696-15e9557d6616
 
