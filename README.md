@@ -1,5 +1,20 @@
+## Origins
 This module was first built, to assist in the development of a project. Heavily inspired by the leaked development footage of GTA 6.
 The tool allowed me to record footage, and watch back frame-by-frame to see what my resource was doing.
+
+## I'm currently refactoring this module
+With  the developer experience in mind. It will be solely a framework for developers to build off. 
+
+In other words - You handle the values, the module handles the rendering.
+
+It will allow you to build your own system to manage values. Which will allow for a large variety of use cases.
+
+### Example:
+#### Rendering ped bones
+The module wont have a "RenderPedBones" Function - You get to create your own, and plug it in to the module.
+You can then toggle on (and off) that function in particular - when you would like to see the ped bones.
+
+## Footage
 
 Here are some videos from development, showing it's practical use - in comparison to reading the console output. 
 
