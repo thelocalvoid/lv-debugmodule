@@ -237,7 +237,9 @@ end
 
 
 
-
+-- TODO: This should later be changed to a method that runs these functions when debug is enabled
+-- Essentially like a queue while it is in-active, then it activates and goes through the queue
+-- Functions should not be running when in-active, however functionality of module may rely on signals being sent ( e.g Registering Entries )
 local IdleFunctions = { -- #### Functions that will run even if module is toggle off
     AddText3d   = Debug.Module.Text3d.Add,
     SetText3d   = Debug.Module.Text3d.Set,
@@ -265,4 +267,4 @@ Functions["ENABLED"] = {}
 for k, v in pairs(IdleFunctions) do Functions["ENABLED"][k] = v end
 for k, v in pairs(ActiveFunctions) do Functions["ENABLED"][k] = v end
 
-ExecuteCommand("ensure cdebug-testing")
+-- ExecuteCommand("ensure cdebug-testing")
