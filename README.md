@@ -12,7 +12,7 @@ It will allow you to build your own system to manage values. Which will allow fo
 ### Example:
 #### Rendering ped bones
 The module wont have a "RenderPedBones" Function - You get to create your own (utilizing the module line rendering), and plug it in to the module.
-You can then toggle on (and off) that function in particular - when you would like to see the ped bones.
+You can then toggle on (or off) that function in particular - whenever you would (or wouldn't) like to see the ped bones.
 
 ## Footage
 
