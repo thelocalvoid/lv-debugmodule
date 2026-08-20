@@ -2,18 +2,6 @@
 This module was first built, to assist in the development of a project. Heavily inspired by the leaked development footage of GTA 6.
 The tool allowed me to record footage, and watch back frame-by-frame to see what my resource was doing.
 
-## I'm currently refactoring this module
-With  the developer experience in mind. It will be solely a framework for developers to build off. 
-
-In other words - You handle the values, the module handles the rendering.
-
-It will allow you to build your own system to manage values. Which will allow for a large variety of use cases.
-
-### Example:
-#### Rendering ped bones
-The module wont have a "RenderPedBones" Function - You get to create your own (utilizing the module line rendering), and plug it in to the module.
-You can then toggle on (or off) that function in particular - whenever you would (or wouldn't) like to see the ped bones.
-
 ## Footage
 
 Here are some videos from development, showing it's practical use - in comparison to reading the console output. 
@@ -63,3 +51,16 @@ It allows you to change variables in real time, via a chat commmand or a inspect
 This is similar to how you can expose variables to the inspector of game engines like unity.
 
 This saves you from having to tab between applications to edit, re-ensure your resource or even restart your server - every time you *just* want to tweak a variable.
+
+
+## I'm currently refactoring this module
+With  the developer experience in mind. It will be solely a framework for developers to build off. 
+
+In other words - You handle the values, the module handles the rendering.
+
+It will allow you to build your own system to manage values. Which will allow for a large variety of use cases.
+
+### Example:
+#### Rendering ped bones
+The module wont have a "RenderPedBones" Function - You get to create your own (utilizing the module line rendering), and plug it in to the module.
+You can then toggle on (or off) that function in particular - whenever you would (or wouldn't) like to see the ped bones.
