@@ -1,9 +1,11 @@
-## What is it?
-The module is designed to provide easy-to-use visual debugging functions, for resource developers. Allowing the developer to *add*, *update*, *toggle*, and *remove* debug features in a quick, simple and reusable way. The module utilizes the FiveM Draw Natives, and handles most of the tedious stuff related to the use of those natives. Natives such as `DrawRect` and `DrawLine`, as well as the numerous text commands related to `BeginTextCommandDisplayText` or similar.
+## Disclaimer
 
 *This is an incomplete repo - I wouldn't necessarily recommend using it lol. There is alot of mess that needs cleaning up. (Lots of learning/experimenting took place during the making of the module 😅)*
 
 It was fun making it and I do wish to finish it at some point, but I have other priorities for the moment. Feel free to fork it and make your own.
+
+## What is it?
+The module is designed to provide easy-to-use visual debugging functions, for resource developers. Allowing the developer to *add*, *update*, *toggle*, and *remove* debug features in a quick, simple and reusable way. The module utilizes the FiveM Draw Natives, and handles most of the tedious stuff related to the use of those natives. Natives such as `DrawRect` and `DrawLine`, as well as the numerous text commands related to `BeginTextCommandDisplayText` or similar.
 
 ## Origins
 This module was first built, to assist our team in the development of a *police proximity sensor* resource. The tool, allowed me to see what the resource was doing just by recording footage and watching back frame-by-frame. Which also helped in visually explaining bugs to the other developers. The module was heavily inspired by earlier released development footage from another game.
